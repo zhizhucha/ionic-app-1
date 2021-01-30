@@ -1,0 +1,9 @@
+<form [formGroup]="newListForm" (ngSubmit)="onSubmit()">
+  <ion-item>
+    <ion-label>List name</ion-label>
+    <ion-input formControlName="name" required></ion-input>
+  </ion-item>
+
+  <ion-button type="submit" expand="block" color="success" [disabled]="newListForm.invalid">Create</ion-button>
+
+</form>
