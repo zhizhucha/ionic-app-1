@@ -1,0 +1,19 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>todo</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+<ion-item *ngFor = "let mTodo of todoList?.todos" >
+  <div>
+    {{mTodo.name}}
+    <p>
+      {{mTodo.description}}
+    </p>
+  </div>
+</ion-item>
+  
+<ion-button expand="block" color="dark" (click)="showNewListModal()">Create todo</ion-button>
+</ion-content>

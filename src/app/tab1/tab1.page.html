@@ -10,7 +10,7 @@
   <ion-list *ngFor="let l of lists">
     <ion-item>
       <ion-label>
-        <a [title]="l.name + 'todos'" [routerLink]="['/lists', l.id]">
+        <a [title]="l.name + 'todos'" [routerLink]="['/todo/list']">
           {{l?.name}}
         </a>
       </ion-label>

@@ -16,8 +16,8 @@ import { CreateListComponent } from '../modals/create-list/create-list.component
     FormsModule,
     ExploreContainerComponentModule,
     Tab1PageRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ],
   declarations: [Tab1Page, CreateListComponent]
 })
-export class Tab1PageModule {}
+export class Tab1PageModule{}
