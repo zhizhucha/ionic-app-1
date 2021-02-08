@@ -12,12 +12,12 @@ import {CreateListComponent} from '../modals/create-list/create-list.component';
 export class Tab1Page implements OnInit{
   lists: List[];
 
-  constructor(private listService: Tab1Service,
+  constructor(private tab1Service: Tab1Service,
               private modalController: ModalController) {
   }
 
   ngOnInit(): void {
-    this.lists = this.listService.getMockList();
+    this.lists = this.tab1Service.getMockList();
   }
 
   async showNewListModal() {
