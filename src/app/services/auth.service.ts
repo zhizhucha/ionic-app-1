@@ -13,7 +13,6 @@ export class AuthService {
 
 
   constructor(public afAuth: AngularFireAuth, public router: Router) {
-
     // Subscribe to the authentification state
     this.afAuth.authState.subscribe(user => {
       if (user){
@@ -38,8 +37,6 @@ export class AuthService {
     });
 
   }
-
-
 
   doRegister(mform: any) {
     console.log(mform);
