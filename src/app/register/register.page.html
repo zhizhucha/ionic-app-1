@@ -1,0 +1,23 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Register</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form [formGroup]="regForm" (ngSubmit)="onRegister()">
+    <ion-item>
+      <ion-label>Username</ion-label>
+      <ion-input type="email" formControlName="email" required></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Password</ion-label>
+      <ion-input type="password" formControlName="password" required></ion-input>
+    </ion-item>
+
+    <ion-button type="submit" expand="block" color="success" [disabled]="regForm.invalid">Register</ion-button>
+
+  </form>
+
+</ion-content>

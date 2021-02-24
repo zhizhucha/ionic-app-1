@@ -21,4 +21,19 @@ export class AuthService {
     });
 
   }
+
+
+
+  doRegister(mform) {
+    console.log(mform);
+
+    return new Promise<any>((resolve, reject) => {
+      this.afAuth.createUserWithEmailAndPassword(mform.email, mform.password)
+          .then(
+              res =>  resolve(res),
+              err => reject(err)
+          );
+    });
+  }
+
 }
