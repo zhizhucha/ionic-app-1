@@ -1,19 +1,21 @@
 import { NgModule } from '@angular/core';
-import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { PreloadAllModules, RouterModule, Routes, CanActivate } from '@angular/router';
+import { AuthGuard } from './services/user/auth.guard';
 
 const routes: Routes = [
-  /*{
-    path: '',
-    loadChildren: () => import('./tabs/tabs.module').then(m => m.TabsPageModule)
+  {
+    path: 'lists',
+    loadChildren: () => import('./tabs/tabs.module').then(m => m.TabsPageModule),
+    canActivate: [AuthGuard],
   },
-    */
   {
     path: '',
     loadChildren: () => import('./login/login.module').then(m => m.LoginPageModule)
   },
   {
     path: 'todo',
-    loadChildren: () => import('./todo/todo.module').then( m => m.TodoPageModule)
+    loadChildren: () => import('./todo/todo.module').then( m => m.TodoPageModule),
+    
   },
   {
     path: 'login',
@@ -22,6 +24,10 @@ const routes: Routes = [
   {
     path: 'register',
     loadChildren: () => import('./register/register.module').then( m => m.RegisterPageModule)
+  },
+  {
+    path: 'recovery',
+    loadChildren: () => import('./password-recovery/password-recovery.module').then( m => m.PasswordRecoveryPageModule)
   }
 ];
 @NgModule({
