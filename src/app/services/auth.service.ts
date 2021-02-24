@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import * as firebase from 'firebase/app';
 import {AngularFireAuth} from '@angular/fire/auth';
-import User from "../../../node_modules/firebase"
+import User from '../../../node_modules/firebase';
 import { Router } from '@angular/router';
 
 @Injectable({
@@ -9,31 +9,30 @@ import { Router } from '@angular/router';
 })
 export class AuthService {
 
-  user : User.User;
+  user: User.User;
 
 
-  constructor(public afAuth: AngularFireAuth, public router : Router) { 
+  constructor(public afAuth: AngularFireAuth, public router: Router) {
 
     // Subscribe to the authentification state
     this.afAuth.authState.subscribe(user => {
-      if(user){
+      if (user){
         this.user = user;
         localStorage.setItem('user', JSON.stringify(this.user));
       } else {
         localStorage.setItem('user', null);
       }
-    })
-
-
+    });
   }
 
-  doLogin(value : any) {
-    console.log(value);
-
+  doLogin(value: any) {
     return new Promise<any>((resolve, reject) => {
       this.afAuth.signInWithEmailAndPassword(value.email, value.password)
           .then(
-              res => resolve(res),
+              res => {
+                this.router.navigate(['/lists']);
+                resolve(res);
+              },
               err => reject(err)
           );
     });
@@ -42,7 +41,7 @@ export class AuthService {
 
 
 
-  doRegister(mform : any) {
+  doRegister(mform: any) {
     console.log(mform);
 
     return new Promise<any>((resolve, reject) => {
@@ -63,7 +62,7 @@ export class AuthService {
 
   }
 
-  async sendPasswordResetEmail( mEmail : string) {
+  async sendPasswordResetEmail( mEmail: string) {
     return await this.afAuth.sendPasswordResetEmail(mEmail);
   }
 
