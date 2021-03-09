@@ -9,5 +9,13 @@
       "launchShowDuration": 0
     }
   },
+  "GoogleAuth":{
+    "scopes": [
+      "profile",
+      "email"
+    ],
+    "serverClientId":"485880855765-kavv0pun8lqd3l90lfntjjuuar0pfd4p.apps.googleusercontent.com",
+    "forceCodeRefreshToken":true
+  },
   "cordova": {}
 }

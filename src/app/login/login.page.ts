@@ -26,4 +26,9 @@ export class LoginPage implements OnInit {
     this.authService.doLogin(credentials);
   }
 
+  //DO not work yet
+  onGoogleSignIn(): void {
+    this.authService.signInWithGoogle();
+  }
+
 }

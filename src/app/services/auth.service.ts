@@ -4,6 +4,10 @@ import {AngularFireAuth} from '@angular/fire/auth';
 import User from '../../../node_modules/firebase';
 import { Router } from '@angular/router';
 
+import '@codetrix-studio/capacitor-google-auth';
+import { Plugins } from '@capacitor/core';
+
+
 @Injectable({
   providedIn: 'root'
 })
@@ -38,7 +42,7 @@ export class AuthService {
 
   }
 
-  doRegister(mform: any) {
+  async doRegister(mform: any) {
     console.log(mform);
 
     return new Promise<any>((resolve, reject) => {
@@ -54,6 +58,10 @@ export class AuthService {
   }
 
 
+
+  
+
+
   async sendEmailVerification(){
     (await this.afAuth.currentUser).sendEmailVerification();
 
@@ -64,8 +72,15 @@ export class AuthService {
   }
 
   get isLoggedIn(): boolean {
-    const user = JSON.parse(localStorage.getItem('user'));
-    return user !== null;
+    //const user = JSON.parse(localStorage.getItem('user'));
+    return this.user !== null;
   }
+
+  async signInWithGoogle(): Promise<void> {
+    const result = await Plugins.GoogleAuth.signIn();
+    console.log('result', result);
+  }
+
+
 
 }
