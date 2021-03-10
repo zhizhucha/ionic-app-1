@@ -15,5 +15,16 @@
   </div>
 </ion-item>
   
-<ion-button expand="block" color="dark" (click)="showNewListModal()">Create todo</ion-button>
+<ion-card>
+    <ion-item>
+      <ion-input [(ngModel)]="myTodoTask" placeholder="Enter a todo">
+
+      </ion-input>
+      <ion-button slot="end" (click)="addTodoTask()">
+        <ion-icon slot="icon-only" shape="round" name="add"></ion-icon>
+      </ion-button>
+    </ion-item>
+</ion-card>
+
+<ion-card expand="block" color="dark" (click)="showNewListModal()">Create todo</ion-card>
 </ion-content>

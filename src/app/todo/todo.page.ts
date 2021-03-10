@@ -10,6 +10,9 @@ import { CreateTodoComponent } from '../modals/create-todo/create-todo.component
 })
 export class TodoPage implements OnInit {
   private todoList : List;
+  myTodoTask : string;
+
+
   constructor(private modalController: ModalController) { }
 
   ngOnInit() {
@@ -18,11 +21,10 @@ export class TodoPage implements OnInit {
   }
 
 
-  async showNewListModal() {
-    const modal = await this.modalController.create({
-      component: CreateTodoComponent
-    });
-    return await modal.present();
+
+  addTodoTask() : void {
+    //Add task to firebase 
+    console.log("Add task : " + this.myTodoTask);
   }
 
 }
