@@ -4,6 +4,9 @@ import { List } from '../../models/list';
 import {ModalController} from '@ionic/angular';
 import {CreateListComponent} from '../modals/create-list/create-list.component';
 import { AuthService } from '../services/auth.service';
+// import {AngularFirestore} from '@angular/fire/firestore';
+// import {AngularFirestore, AngularFirestoreDocument, AngularFirestoreCollection} from '@angular/fire/firestore';
+// import {Observable} from 'rxjs';
 
 @Component({
   selector: 'app-tab1',
@@ -23,7 +26,6 @@ export class Tab1Page implements OnInit{
     this.lists = this.tab1Service.getMockList();
 
     const loginState = this.authService.isLoggedIn;
-    console.log("Is logged : " + loginState);
 
   }
 
