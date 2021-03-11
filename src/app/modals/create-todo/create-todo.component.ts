@@ -21,7 +21,7 @@ export class CreateTodoComponent implements OnInit {
   ngOnInit() {}
 
   onSubmit() {
-    this.listService.saveList(this.newListForm.get('name').value);
+    // this.listService.saveList(this.newListForm.get('name').value);
     this.modalController.dismiss({
       dismiss: true
     });

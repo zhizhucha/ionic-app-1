@@ -4,6 +4,8 @@ import { List } from '../../models/list';
 import {ModalController} from '@ionic/angular';
 import {CreateListComponent} from '../modals/create-list/create-list.component';
 import { AuthService } from '../services/auth.service';
+import {FirestoreService} from '../services/data/firestore.service';
+import {Observable} from 'rxjs';
 // import {AngularFirestore} from '@angular/fire/firestore';
 // import {AngularFirestore, AngularFirestoreDocument, AngularFirestoreCollection} from '@angular/fire/firestore';
 // import {Observable} from 'rxjs';
@@ -14,19 +16,19 @@ import { AuthService } from '../services/auth.service';
   styleUrls: ['tab1.page.scss']
 })
 export class Tab1Page implements OnInit{
-  lists: List[];
+  lists: Observable<List[]>;
 
   constructor(private tab1Service: Tab1Service,
               private modalController: ModalController,
-              private authService: AuthService
+              private authService: AuthService,
+              private firestoreService: FirestoreService
               ) {
   }
 
   ngOnInit(): void {
-    this.lists = this.tab1Service.getMockList();
-
     const loginState = this.authService.isLoggedIn;
 
+    this.lists = this.firestoreService.getLists();
   }
 
   async showNewListModal() {

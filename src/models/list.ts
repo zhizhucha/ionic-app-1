@@ -2,12 +2,14 @@ import {Todo} from './todo';
 
 export class List {
     id: string;
-    name: string;
+    listName: string;
+    listOwner: string;
     todos: Todo[];
 
-    constructor(name: string) {
+    constructor(name: string, owner: string) {
         this.id = Math.random().toString(36).substr(2, 9);
-        this.name = name;
+        this.listName = name;
+        this.listOwner = owner;
         this.todos = [];
     }
 }

@@ -11,6 +11,15 @@ export class Tab1Service {
     this.lists = [];
   }
 
+  public getOne(id: string): List {
+    return this.lists.find(l => l?.id === id);
+  }
+
+  public deleteList(id: string): void {
+    this.lists = this.lists.filter(l => l?.id !== id);
+  }
+
+  /*
   public getAll(): List[] { return this.lists; }
 
   public getMockList(): List[] {
@@ -22,15 +31,10 @@ export class Tab1Service {
     return this.lists;
   }
 
-  public getOne(id: string): List {
-    return this.lists.find(l => l?.id === id);
-  }
-
   public saveList(name: string): void {
     this.lists.push(new List(name));
   }
 
-  public deleteList(id: string): void {
-    this.lists = this.lists.filter(l => l?.id !== id);
-  }
+ */
+
 }
