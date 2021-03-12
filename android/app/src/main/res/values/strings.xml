@@ -2,7 +2,7 @@
 <resources>
     <string name="app_name">myApp</string>
     <string name="title_activity_main">myApp</string>
-    <string name="package_name">io.ionic.starter</string>
-    <string name="custom_url_scheme">io.ionic.starter</string>
-    <string name= "server_client_id">485880855765-kavv0pun8lqd3l90lfntjjuuar0pfd4p.apps.googleusercontent.com</string>
+    <string name="package_name">io.ionicgroup16.todolists</string>
+    <string name="custom_url_scheme">io.ionicgroup16.todolists</string>
+    <string name= "server_client_id">1046802816212-m4l0klve9isp4kpskbml5o5n89n1venq.apps.googleusercontent.com</string>
 </resources>

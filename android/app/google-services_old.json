@@ -7,14 +7,14 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1046802816212:android:d7b23133cc6b8376c06f41",
+        "mobilesdk_app_id": "1:1046802816212:android:4e4842c12783ef5dc06f41",
         "android_client_info": {
           "package_name": "io.ionicgroup16.todolists"
         }
       },
       "oauth_client": [
         {
-          "client_id": "1046802816212-m4l0klve9isp4kpskbml5o5n89n1venq.apps.googleusercontent.com",
+          "client_id": "1046802816212-pl1ej1eq58vcg4qhi3co7dvuf7aca8r8.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "io.ionicgroup16.todolists",

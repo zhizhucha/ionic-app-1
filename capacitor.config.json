@@ -1,5 +1,5 @@
 {
-  "appId": "io.ionic.starter",
+  "appId": "io.ionicgroup16.todolists",
   "appName": "ionic-app-1",
   "bundledWebRuntime": false,
   "npmClient": "npm",
@@ -9,12 +9,13 @@
       "launchShowDuration": 0
     }
   },
+  "linuxAndroidStudioPath": "/home/daoliangshu/android-studio/bin/studio.sh",
   "GoogleAuth":{
     "scopes": [
       "profile",
       "email"
     ],
-    "serverClientId":"485880855765-kavv0pun8lqd3l90lfntjjuuar0pfd4p.apps.googleusercontent.com",
+    "serverClientId":"753993843877-1khcgojp3rq4kv7qukiab6rbarje2j7h.apps.googleusercontent.com",
     "forceCodeRefreshToken":true
   },
   "cordova": {}

@@ -1,4 +1,4 @@
-package io.ionic.starter;
+package io.ionicgroup16.todolists;
 
 import android.os.Bundle;
 
