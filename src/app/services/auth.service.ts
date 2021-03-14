@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
-import * as firebase from 'firebase/app';
+
 import {AngularFireAuth} from '@angular/fire/auth';
 import User from '../../../node_modules/firebase';
 import { Router } from '@angular/router';
+import firebase from 'firebase/app'
 
 import '@codetrix-studio/capacitor-google-auth';
 import { Plugins } from '@capacitor/core';
@@ -76,10 +77,28 @@ export class AuthService {
     return this.user !== null;
   }
 
-  async signInWithGoogle(): Promise<void> {
-    const result = await Plugins.GoogleAuth.signIn();
-    console.log('result', result);
+  async signInWithGoogle(): Promise<any> {
+    let googleUser = await Plugins.GoogleAuth.signIn(null) as any;
+    const credential = firebase.auth.GoogleAuthProvider.credential(googleUser.authentication.idToken);
+    await this.afAuth.signInWithCredential(credential);
+   
+    
   }
+
+  /*
+  onGoogleLoginSuccess(authentication){
+    let creds : User.auth.AuthCredential
+    const credential = authentication;
+    console.log(credential);
+    this.afAuth.signInWithCredential(credential)
+      .then((success) => {
+        alert('successfully');
+        //this.isGoogleLogin = true;
+        this.user =  success.user;
+        //this.loading.dismiss();
+      });
+  }
+  */
 
 
 
