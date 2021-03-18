@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import * as firebase from 'firebase/app';
 import {AngularFireAuth} from '@angular/fire/auth';
 import User from '../../../node_modules/firebase';
 import { Router } from '@angular/router';
@@ -53,6 +52,9 @@ export class AuthService {
                 resolve(res);
               },
               err => reject(err)
+          )
+          .finally(
+              () => { this.router.navigate(['/lists']); }
           );
     });
   }
