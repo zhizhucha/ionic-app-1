@@ -28,7 +28,7 @@ export class Tab1Page implements OnInit{
   ngOnInit(): void {
     const loginState = this.authService.isLoggedIn;
     // console.log(this.authService.user);
-    this.lists = this.firestoreService.getLists();
+    this.lists = this.firestoreService.getLists(this.authService.user);
   }
 
   async showNewListModal() {
