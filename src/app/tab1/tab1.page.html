@@ -10,8 +10,8 @@
   <ion-list *ngFor="let l of lists | async">
     <ion-item>
       <ion-label>
-        <a [title]="l.listName + 'todos'" [routerLink]="['/todo/list']">
-          {{l?.listName}}
+        <a [title]="l?.name + 'todos'" [routerLink]="['/todo/list']">
+          {{l?.name}}
         </a>
       </ion-label>
     </ion-item>

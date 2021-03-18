@@ -16,7 +16,7 @@ import {Observable} from 'rxjs';
   styleUrls: ['tab1.page.scss']
 })
 export class Tab1Page implements OnInit{
-  lists: Observable<List[]>;
+  lists: Observable<any>;
 
   constructor(private tab1Service: Tab1Service,
               private modalController: ModalController,
@@ -27,7 +27,7 @@ export class Tab1Page implements OnInit{
 
   ngOnInit(): void {
     const loginState = this.authService.isLoggedIn;
-
+    // console.log(this.authService.user);
     this.lists = this.firestoreService.getLists();
   }
 
