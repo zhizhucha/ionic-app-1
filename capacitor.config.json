@@ -10,12 +10,12 @@
     }
   },
   "linuxAndroidStudioPath": "/home/daoliangshu/android-studio/bin/studio.sh",
-  "GoogleAuth":{
+  "GoogleAuth": {
     "scopes": [
       "profile",
       "email"
     ],
-    "serverClientId":"753993843877-1khcgojp3rq4kv7qukiab6rbarje2j7h.apps.googleusercontent.com",
+    "serverClientId":"1046802816212-okq00hdi6k768arh50p03rdrr7a30o68.apps.googleusercontent.com",
     "forceCodeRefreshToken":true
   },
   "cordova": {}
