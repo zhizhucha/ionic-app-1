@@ -1,38 +1,36 @@
 import { NgModule } from '@angular/core';
-import { PreloadAllModules, RouterModule, Routes, CanActivate } from '@angular/router';
+import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './services/user/auth.guard';
 
 const routes: Routes = [
   {
-    path: 'lists',
-    loadChildren: () => import('./tab1/tab1.module').then(m => m.Tab1PageModule),
+    path: 'home',
+    loadChildren: () => import('./home/home.module').then( m => m.HomePageModule),
     canActivate: [AuthGuard],
   },
   {
     path: '',
-    loadChildren: () => import('./login/login.module').then(m => m.LoginPageModule)
-  },
-  {
-    path: 'todo',
-    loadChildren: () => import('./todo/todo.module').then( m => m.TodoPageModule),
-  },
-  {
-    path: 'login',
-    loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule)
+    pathMatch: 'full',
+    redirectTo: 'home',
   },
   {
     path: 'register',
-    loadChildren: () => import('./register/register.module').then( m => m.RegisterPageModule)
+    loadChildren: () => import('./pages/register/register.module').then( m => m.RegisterPageModule)
+  },
+  {
+    path: 'login',
+    loadChildren: () => import('./pages/login/login.module').then( m => m.LoginPageModule)
   },
   {
     path: 'recovery',
-    loadChildren: () => import('./password-recovery/password-recovery.module').then( m => m.PasswordRecoveryPageModule)
-  }
+    loadChildren: () => import('./pages/recovery/recovery.module').then( m => m.RecoveryPageModule)
+  },
 ];
+
 @NgModule({
   imports: [
     RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })
   ],
   exports: [RouterModule]
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }

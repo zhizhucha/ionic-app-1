@@ -1,14 +1,11 @@
 {
   "targets": {
-    "dev-mobile-todo": {
+    "todoapp-ea4cd": {
       "hosting": {
         "app": [
-          "dev-mobile-todo"
+          "todoapp-ea4cd"
         ]
       }
     }
-  },
-  "projects": {
-    "default": "dev-mobile-todo"
   }
 }

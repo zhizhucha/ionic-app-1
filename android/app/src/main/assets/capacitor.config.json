@@ -1,13 +1,22 @@
 {
-  "appId": "io.ionic.starter",
-  "appName": "ionic-app-1",
+  "appId": "com.uga.todoapp.app",
+  "appName": "todoapp",
   "bundledWebRuntime": false,
   "npmClient": "npm",
   "webDir": "www",
   "plugins": {
     "SplashScreen": {
       "launchShowDuration": 0
+    },
+    "GoogleAuth": {
+    	"scopes": [
+    		"profile",
+    		"email"
+    	],
+    	"serverClientId": "585037534741-qe3ai6sje95ij8b0u702lrsr1niqt2vp.apps.googleusercontent.com",
+    	"forceCodeForRefreshToken": true
     }
   },
+  "linuxAndroidStudioPath": "/usr/local/android-studio/bin/studio.sh",
   "cordova": {}
 }

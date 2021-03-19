@@ -5,24 +5,25 @@ import firebase from 'firebase/app';
 import 'firebase/auth';
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
 export class AuthGuard implements CanActivate {
-  constructor(private router: Router) {}
+  constructor(private router: Router){}
+
   canActivate(
-    next: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot
-  ): boolean | Observable<boolean> | Promise<boolean> {
-    return new Promise((resolve, reject) => {
-      firebase.auth().onAuthStateChanged((user: firebase.User) => {
-        if (user) {
-          resolve(true);
-        } else {
-          console.log('User is not logged in');
-          this.router.navigate(['/login']);
-          resolve(false);
-        }
+    route: ActivatedRouteSnapshot,
+    state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
+      return new Promise((resolve, reject) => {
+        firebase.auth().onAuthStateChanged((user: firebase.User) => {
+          if (user) {
+            resolve(true);
+          } else {
+            console.log('User is not logged in');
+            this.router.navigateByUrl('/login');
+            //resolve(false);
+          }
+        });
       });
-    });
   }
+  
 }
