@@ -52,7 +52,6 @@ export class AuthService {
               },
               err => reject(err)
           );
-        // finally display page with information telling user to verify their account through their email
     });
   }
 

@@ -13,12 +13,12 @@ export class FirestoreService {
 
   public createList(name: string, creator: string): Promise<void> {
     const listId = this.afs.createId();
-     return this.afs.doc(`lists/${listId}`).set({name, creator});
+    return this.afs.doc(`lists/${listId}`).set({name, creator});
   }
 
 
   public getLists(user: User.User): Observable<any[]> {
-    console.log("Getting lists");
+    console.log('Getting lists');
     return this.afs.collection<any>('lists', ref => ref.where('creator', '==', user.email)).valueChanges();
   }
 }
