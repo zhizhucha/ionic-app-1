@@ -30,8 +30,7 @@ export class AuthService {
           .then(
               res => {
                 this.setCurrentUser(res.user);
-                console.log(this.afAuth.authState);
-                this.router.navigate(['/home']);
+                // console.log(this.afAuth.authState);
                 resolve(res);
               },
               err => reject(err)

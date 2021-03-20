@@ -23,11 +23,11 @@ export class HomePage implements OnInit{
 
   ngOnInit(): void {
     const loginState = this.authService.isLoggedIn;
-    console.log('Is logged ? : ' + loginState);
+    // console.log('Is logged ? : ' + loginState);
     console.log(this.authService.getCurrentUser());
 
-    this.firestoreService.getLists(this.authService.user).subscribe( (data : List[]) => {
-      console.log("Retrieved : " + JSON.stringify(data));
+    this.firestoreService.getLists(this.authService.user).subscribe( (data: List[]) => {
+      console.log('Retrieved : ' + JSON.stringify(data));
       this.lists = data;
     });
   }
