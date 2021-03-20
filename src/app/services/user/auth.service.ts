@@ -13,7 +13,7 @@ export class AuthService {
   user: User.User;
 
 
-  constructor(public afAuth: AngularFireAuth, public router: Router) { 
+  constructor(public afAuth: AngularFireAuth, public router: Router) {
     this.afAuth.authState.subscribe(user => {
       if (user){
         this.user = user;
@@ -24,11 +24,12 @@ export class AuthService {
     });
   }
 
-  doLogin(value: any) {
+  async doLogin(value: any) {
     return new Promise<any>((resolve, reject) => {
       this.afAuth.signInWithEmailAndPassword(value.email, value.password)
           .then(
               res => {
+                this.setCurrentUser(res.user);
                 console.log(this.afAuth.authState);
                 this.router.navigate(['/home']);
                 resolve(res);
@@ -51,6 +52,7 @@ export class AuthService {
               },
               err => reject(err)
           );
+        // finally display page with information telling user to verify their account through their email
     });
   }
 
@@ -73,25 +75,24 @@ export class AuthService {
   }
 
   get isLoggedIn(): boolean {
-    //const user = JSON.parse(localStorage.getItem('user'));
-    if(localStorage.getItem('user') != null)
+    let localUser = null;
+    if (localStorage.getItem('user') != null)
     {
-      if(this.user === undefined)
-      {
-          this.user = JSON.parse(localStorage.getItem('user'));
-
-      }
+      localUser = JSON.parse(localStorage.getItem('user'));
     }
-    console.log("user = " + this.user);
-    console.log("user = " + localStorage.getItem('user'));
-    return this.user !== null && this.user !== undefined;
+    return localUser !== null ||  (this.user !== undefined && this.user !== null);
   }
 
   async signInWithGoogle(): Promise<any> {
     let googleUser = await Plugins.GoogleAuth.signIn() as any;
     const credential = firebase.auth.GoogleAuthProvider.credential(googleUser.authentication.idToken);
     await this.afAuth.signInWithCredential(credential);
-   
-    
+
+
+  }
+
+  setCurrentUser(currentUser: User.User) {
+    this.user = currentUser;
+    localStorage.setItem('user', JSON.stringify(this.user));
   }
 }
