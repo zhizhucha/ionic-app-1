@@ -25,6 +25,10 @@ const routes: Routes = [
     path: 'recovery',
     loadChildren: () => import('./pages/recovery/recovery.module').then( m => m.RecoveryPageModule)
   },
+  {
+    path: 'todos',
+    loadChildren: () => import('./pages/todos/todos.module').then( m => m.TodosPageModule)
+  },
 ];
 
 @NgModule({

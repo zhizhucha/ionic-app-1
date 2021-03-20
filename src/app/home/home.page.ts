@@ -22,6 +22,7 @@ export class HomePage implements OnInit{
   }
 
   ngOnInit(): void {
+    
     const loginState = this.authService.isLoggedIn;
     console.log('Is logged ? : ' + loginState);
     console.log(this.authService.getCurrentUser());

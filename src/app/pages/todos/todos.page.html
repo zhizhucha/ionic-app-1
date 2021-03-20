@@ -1,0 +1,19 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>todos</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  
+  <li > <app-todo-card *ngFor="let mtodo of todos"  [title]="mtodo.name" [description]="mtodo.description" [isDone]="mtodo.isDone"> </app-todo-card>
+  </li>
+
+
+
+
+<ion-button expand="block" color="dark" (click)="presentAddTodoModal()">Create list</ion-button>
+
+</ion-content>
+
+
