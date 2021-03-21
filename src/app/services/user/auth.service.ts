@@ -93,4 +93,9 @@ export class AuthService {
     this.user = currentUser;
     localStorage.setItem('user', JSON.stringify(this.user));
   }
+
+  async doSignOut(): Promise<any> {
+    return new Promise<any>(() => { this.afAuth.signOut(); });
+
+  }
 }

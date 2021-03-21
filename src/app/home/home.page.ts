@@ -62,4 +62,8 @@ export class HomePage implements OnInit{
     });
     await alert.present();
   }
+
+  signOut() {
+    this.authService.doSignOut().then(() => {this.router.navigate(['']); });
+  }
 }
