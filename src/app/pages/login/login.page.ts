@@ -38,9 +38,30 @@ export class LoginPage implements OnInit {
     }
   }
 
-  //DO not work yet
-  onGoogleSignIn(): void {
-    this.authService.signInWithGoogle();
+  async openToast() {   
+    const toast = await this.toastControl.create({  
+      message: 'You are now connected',  
+      animated: true,
+      duration: 2000,
+      position: 'bottom',  
+      translucent: true,
+      color: "success"
+    });  
+    toast.present();  
+    toast.onDidDismiss().then((val) => {  
+      console.log('Toast Dismissed');   
+    });  
+  }
+
+  onGoogleSignIn(): void{
+    this.authService.signInWithGoogle().then( () => {
+      this.openToast();
+      this.router.navigate([`/home`]);
+    }, (err : any) => {
+      console.log("Error google login : " + err);
+    }
+    );
+
   }
 
 }
