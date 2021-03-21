@@ -11,7 +11,7 @@
     <ion-item>
       <ion-label>
       
-        <a [title]="l.name + '-todos'" [routerLink]="['/todo/list']">
+        <a [title]="l.name + '-todos'" [routerLink]="['/todos', l.id]">
           {{l?.name}}
         </a>
       </ion-label>
