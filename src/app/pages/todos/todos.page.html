@@ -5,14 +5,21 @@
 </ion-header>
 
 <ion-content>
-  
-  <li > <app-todo-card *ngFor="let mtodo of todos"  [title]="mtodo.name" [description]="mtodo.description" [isDone]="mtodo.isDone"> </app-todo-card>
-  </li>
+<ion-item-sliding *ngFor="let mtodo of todos">
+
+  <ion-item-options >
+    <ion-item-option *ngIf="hasWritePermission == true" (click)="onRemoveTodo(mtodo.id);"><ion-icon name="trash" size="large"></ion-icon></ion-item-option>
+  </ion-item-options>
+  <ion-item>
+    <app-todo-card   [title]="mtodo.name" [description]="mtodo.description" [isDone]="mtodo.isDone"> </app-todo-card>
+  </ion-item>
+    
+</ion-item-sliding>
 
 
 
 
-<ion-button expand="block" color="dark" (click)="presentAddTodoModal()">Create list</ion-button>
+<ion-button expand="block" color="dark" (click)="presentAddTodoModal()" *ngIf="hasWritePermission">Create Todo</ion-button>
 
 </ion-content>
 

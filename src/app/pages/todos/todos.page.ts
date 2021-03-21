@@ -17,12 +17,13 @@ import { CreateTodoComponent } from '../../components/create-todo/create-todo.co
 export class TodosPage implements OnInit {
 
   private mListId : string;
+  private hasWritePermission : boolean;
   public todos : Todo[];
   constructor(private modalController: ModalController,private activatedRoute : ActivatedRoute, private authService : AuthService, private firestoreService : FirestoreService) { }
 
   ngOnInit() {
 
-
+    this.hasWritePermission = true; //TODO : improve permission
     this.mListId = this.activatedRoute.snapshot.params.listId;
     this.firestoreService.getTodoList(this.authService.getCurrentUser(), this.mListId).subscribe(
        (todos : Todo[]) => {
@@ -35,6 +36,14 @@ export class TodosPage implements OnInit {
     );    
   }
 
+  onRemoveTodo(todoId : string): void{
+    this.firestoreService.deleteTodo(this.mListId, todoId).then( res  => {
+      },
+      (err) => {
+        console.log("Error : " + err);
+      }
+    );
+  }
 
   async presentAddTodoModal() {
     const modal = await this.modalController.create({

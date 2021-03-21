@@ -40,6 +40,12 @@ export class FirestoreService {
     return this.afs.doc(`lists/${listId}/todos/${todoId}`).set({name, description, isDone});
   }
 
+  /**
+   * Deleting a Todo inside a list
+   * @param listId 
+   * @param todoId 
+   * @returns 
+   */
   public deleteTodo(listId: string, todoId : string) : Promise<void> {
     const todoDoc = this.afs.doc<Todo>(`lists/${listId}/todos/${todoId}`);
     return todoDoc.delete();
