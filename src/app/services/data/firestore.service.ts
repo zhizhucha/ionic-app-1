@@ -12,8 +12,8 @@ export class FirestoreService {
   constructor(private afs: AngularFirestore) { }
 
   public createList(name: string, creator: string): Promise<void> {
-    const listId = this.afs.createId();
-    return this.afs.doc(`lists/${listId}`).set({name, creator});
+    const id = this.afs.createId();
+    return this.afs.doc(`lists/${id}`).set({id, name, creator});
   }
 
 
@@ -37,5 +37,9 @@ export class FirestoreService {
     const todoId = this.afs.createId(); 
     const isDone = false;
     return this.afs.doc(`lists/${listId}/todos/${todoId}`).set({name, description, isDone});
+  }
+
+  public deleteList(id: string): Promise<void> {
+    return this.afs.doc(`lists/${id}`).delete();
   }
 }
