@@ -15,6 +15,7 @@ import {Router} from '@angular/router';
 export class HomePage implements OnInit{
   lists: List[];
 
+
   constructor(
               private modalController: ModalController,
               private authService: AuthService,
@@ -23,11 +24,11 @@ export class HomePage implements OnInit{
   }
 
   ngOnInit(): void {
-    // const isLoggedIn = this.authService.isLoggedIn;
-    // console.log(this.authService.getCurrentUser());
+    //const isLoggedIn = this.authService.isLoggedIn;
+    //console.log(this.authService.getCurrentUser());
 
     if (this.authService.isLoggedIn) {
-      this.firestoreService.getLists(this.authService.user).subscribe( (data: List[]) => {
+      this.firestoreService.getLists(this.authService.getCurrentUser()).subscribe( (data: List[]) => {
         console.log('Retrieved : ' + JSON.stringify(data));
         this.lists = data;
       });
