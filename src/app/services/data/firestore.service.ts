@@ -3,6 +3,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { Observable } from 'rxjs/internal/Observable';
 import { List } from '../../../models/list';
 import User from '../../../../node_modules/firebase';
+import { Todo } from '../../../models/todo';
 
 @Injectable({
   providedIn: 'root'
@@ -38,4 +39,11 @@ export class FirestoreService {
     const isDone = false;
     return this.afs.doc(`lists/${listId}/todos/${todoId}`).set({name, description, isDone});
   }
+
+  public deleteTodo(listId: string, todoId : string) : Promise<void> {
+    const todoDoc = this.afs.doc<Todo>(`lists/${listId}/todos/${todoId}`);
+    return todoDoc.delete();
+  }
+
+
 }
