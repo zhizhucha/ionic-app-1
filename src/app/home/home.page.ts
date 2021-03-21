@@ -27,6 +27,10 @@ export class HomePage implements OnInit{
 
   ngOnInit(): void {
 
+    //const isLoggedIn = this.authService.isLoggedIn;
+    //console.log(this.authService.getCurrentUser());
+
+
     if (this.authService.isLoggedIn) {
       this.userEmail = this.authService.getCurrentUser().email;
       this.firestoreService.getLists(this.authService.getCurrentUser()).subscribe( (data: List[]) => {
