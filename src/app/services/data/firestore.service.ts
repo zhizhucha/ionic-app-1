@@ -12,13 +12,17 @@ export class FirestoreService {
   constructor(private afs: AngularFirestore) { }
 
   public createList(name: string, creator: string): Promise<void> {
-    const listId = this.afs.createId();
-    return this.afs.doc(`lists/${listId}`).set({name, creator});
+    const id = this.afs.createId();
+    return this.afs.doc(`lists/${id}`).set({id, name, creator});
   }
 
 
   public getLists(user: User.User): Observable<any[]> {
     console.log('Getting lists');
     return this.afs.collection<any>('lists', ref => ref.where('creator', '==', user.email)).valueChanges();
+  }
+
+  public deleteList(id: string): Promise<void> {
+    return this.afs.doc(`lists/${id}`).delete();
   }
 }
