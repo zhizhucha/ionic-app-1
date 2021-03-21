@@ -74,7 +74,7 @@ export class AuthService {
 
   get isLoggedIn(): boolean {
     let localUser = null;
-    if (localStorage.getItem('user') != null)
+    if (localStorage.getItem('user') !== null)
     {
       localUser = JSON.parse(localStorage.getItem('user'));
     }
@@ -84,9 +84,15 @@ export class AuthService {
   async signInWithGoogle(): Promise<any> {
     let googleUser = await Plugins.GoogleAuth.signIn() as any;
     const credential = firebase.auth.GoogleAuthProvider.credential(googleUser.authentication.idToken);
-    await this.afAuth.signInWithCredential(credential);
+    await this.afAuth.signInWithCredential(credential).then(
+      (res : any) => {
+        console.log("User : " + JSON.stringify(res));
+        console.log("User2 : " + res.user);
+        this.setCurrentUser(res.user);
+      }, (err : any) => {
 
-
+      }
+    )
   }
 
   setCurrentUser(currentUser: User.User) {
@@ -95,7 +101,10 @@ export class AuthService {
   }
 
   async doSignOut(): Promise<any> {
-    return new Promise<any>(() => { this.afAuth.signOut(); });
+    return new Promise<any>(() => { 
+      this.user = undefined;
+      this.afAuth.signOut();
+    });
 
   }
 }

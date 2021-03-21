@@ -26,9 +26,6 @@ export class HomePage implements OnInit{
   }
 
   ngOnInit(): void {
-    //const isLoggedIn = this.authService.isLoggedIn;
-    //console.log(this.authService.getCurrentUser());
-    this
 
     if (this.authService.isLoggedIn) {
       this.userEmail = this.authService.getCurrentUser().email;
@@ -50,6 +47,9 @@ export class HomePage implements OnInit{
   }
 
   async delete(id: string, name: string) {
+    const user = this.authService.getCurrentUser();
+    console.log("Delete from user : " + user.email);
+
     const alert = await this.alertController.create({
       message: `Delete todo list "${name}" ?`,
       buttons: [
@@ -59,7 +59,12 @@ export class HomePage implements OnInit{
         {
           text: 'Confirm',
           role: 'confirm',
-          handler: () => { this.firestoreService.deleteList(id).then(() => {}); }
+          handler: () => { this.firestoreService.deleteList(id).then(() => {
+              console.log("List deleted");
+            }, (err : any) => {
+              console.log("Error while deleting list : " + err);
+            }
+          ); }
         }
       ]
     });
@@ -67,6 +72,7 @@ export class HomePage implements OnInit{
   }
 
   signOut() {
-    this.authService.doSignOut().then(() => {this.router.navigate(['']); });
+    this.authService.doSignOut().then(() => {
+      this.router.navigate(['']); });
   }
 }
