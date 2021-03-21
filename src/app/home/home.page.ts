@@ -5,6 +5,7 @@ import {FirestoreService} from '../services/data/firestore.service';
 import { List } from '../../models/list';
 import { ModalController } from '@ionic/angular';
 import { CreateListComponent } from '../components/create-list/create-list.component';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -17,19 +18,23 @@ export class HomePage implements OnInit{
   constructor(
               private modalController: ModalController,
               private authService: AuthService,
-              private firestoreService: FirestoreService
+              private firestoreService: FirestoreService, private router: Router
               ) {
   }
 
   ngOnInit(): void {
-    const loginState = this.authService.isLoggedIn;
-    // console.log('Is logged ? : ' + loginState);
-    console.log(this.authService.getCurrentUser());
+    // const isLoggedIn = this.authService.isLoggedIn;
+    // console.log(this.authService.getCurrentUser());
 
-    this.firestoreService.getLists(this.authService.user).subscribe( (data: List[]) => {
-      console.log('Retrieved : ' + JSON.stringify(data));
-      this.lists = data;
-    });
+    if (this.authService.isLoggedIn) {
+      this.firestoreService.getLists(this.authService.user).subscribe( (data: List[]) => {
+        console.log('Retrieved : ' + JSON.stringify(data));
+        this.lists = data;
+      });
+    }
+    else {
+      this.router.navigate(['login']);
+    }
   }
 
   async showNewListModal() {
