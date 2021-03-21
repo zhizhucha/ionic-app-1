@@ -16,6 +16,7 @@ import {AlertController} from '@ionic/angular';
 export class HomePage implements OnInit{
   lists: List[];
 
+
   constructor(
               private modalController: ModalController,
               private authService: AuthService, private alertController: AlertController,
@@ -24,8 +25,8 @@ export class HomePage implements OnInit{
   }
 
   ngOnInit(): void {
-    // const isLoggedIn = this.authService.isLoggedIn;
-    // console.log(this.authService.getCurrentUser());
+    //const isLoggedIn = this.authService.isLoggedIn;
+    //console.log(this.authService.getCurrentUser());
 
     if (this.authService.isLoggedIn) {
       this.firestoreService.getLists(this.authService.getCurrentUser()).subscribe( (data: List[]) => {
