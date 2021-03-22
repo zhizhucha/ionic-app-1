@@ -19,6 +19,10 @@ export class CreateTodoComponent implements OnInit {
   public todoForm : FormGroup;
   todoName: FormControl;
   todoDescription: FormControl;
+  dueDate: FormControl;
+  minDate : string;
+  maxDate : string;
+
   isSubmitted = false;
 
   constructor(private fb: FormBuilder,
@@ -26,11 +30,22 @@ export class CreateTodoComponent implements OnInit {
       private authService: AuthService,
       private firestoreService: FirestoreService) { 
 
-    this.todoName = new FormControl("Default TodoName", [ Validators.required]);
-    this.todoDescription = new FormControl("Default Description", [ Validators.required]);
+    this.todoName = new FormControl('', [ Validators.required]);
+    this.todoDescription = new FormControl('', [ Validators.required]);
+    this.dueDate = new FormControl( (new Date()).toJSON());
+
+    this.minDate = (new Date()).toJSON();
+    console.log("MinDate : " + this.minDate);
+    console.log("MaxDate : " + this.minDate);
+    const curDate = new Date();
+    //Max date is current year + 2
+    curDate.setFullYear(curDate.getFullYear() + 2);
+    this.maxDate = (curDate).toJSON();
+
     this.todoForm = new FormGroup({
       todoName: this.todoName,
-      todoDescription: this.todoDescription
+      todoDescription: this.todoDescription,
+      dueDate: this.dueDate
     });
 
   }
@@ -54,7 +69,11 @@ export class CreateTodoComponent implements OnInit {
       console.log('List Id not provided');
     } else {
       console.log(" The list ID when creating todo : " + this.listId);
-      this.firestoreService.createTodo(this.listId, this.todoForm.get("todoName").value, this.todoForm.get("todoDescription").value).then(
+      console.log("This date for the task : " + this.todoForm.get("dueDate").value);
+      this.firestoreService.createTodo(this.listId, this.todoForm.get("todoName").value, 
+                                      this.todoForm.get("todoDescription").value,
+                                      this.todoForm.get("dueDate").value
+                                      ).then(
 
         () => {
           console.log("Did it really succesed?");

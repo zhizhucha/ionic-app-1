@@ -3,11 +3,13 @@ export class Todo {
     name: string;
     description: string;
     isDone: boolean;
+    dueDate : Date;
 
     constructor(name: string, description: string) {
         this.id = Math.random().toString(36).substr(2, 9);
         this.name = name;
         this.description = description;
         this.isDone = false;
+        this.dueDate = null;
     }
 }
