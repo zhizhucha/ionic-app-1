@@ -8,13 +8,18 @@
     <form [formGroup]="todoForm"  >
       <ion-item lines="full">
         <ion-label position="floating">Name</ion-label>
-        <ion-input formControlName="todoName" type="text"></ion-input>
+        <ion-input formControlName="todoName" type="text" placeholder="Select a name for the task"></ion-input>
       </ion-item>
 
       <ion-item lines="full">
         <ion-label position="floating">Description</ion-label>
-        <ion-input formControlName="todoDescription" type="text"></ion-input>
+        <ion-input formControlName="todoDescription" type="text" placeholder="Enter a description"></ion-input>
       </ion-item>
+
+        <ion-item>
+          <ion-label position="floating">Due date</ion-label>
+          <ion-datetime formControlName="dueDate" min="{{minDate}}" max="{{maxDate}}" displayFormat="DD/MM/YYYY" placeholder="Select Date"></ion-datetime>
+        </ion-item>
 
 
 

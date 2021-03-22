@@ -10,6 +10,7 @@ export class TodoCardComponent implements OnInit {
   @Input() title : string;
   @Input() description : string;
   @Input() isDone : boolean;
+  @Input() dueDate : string;
 
   constructor() { 
     
@@ -18,7 +19,7 @@ export class TodoCardComponent implements OnInit {
   
   ngOnInit() {
 
-
+    //this.dueDate = null;
   }
 
 }

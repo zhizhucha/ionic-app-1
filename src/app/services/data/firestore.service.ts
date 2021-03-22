@@ -28,16 +28,17 @@ export class FirestoreService {
    */
   public getTodoList(user : User.User, listId : string): Observable<any>{
     console.log(" myListId : " + listId);
-    return  this.afs.collection<any>(`lists/${listId}/todos`).valueChanges( {idField: 'id' });
+    return  this.afs.collection<any>(`lists/${listId}/todos`, ref => ref.orderBy('dueDate', 'asc') ).valueChanges( {idField: 'id' });
   }
 
   /**
    * Creating a todo inside a list
    */
-  public createTodo(listId : string, name : string, description : string): Promise<void>{
+  public createTodo(listId : string, name : string, description : string, dueDate : Date): Promise<void>{
     const todoId = this.afs.createId(); 
     const isDone = false;
-    return this.afs.doc(`lists/${listId}/todos/${todoId}`).set({name, description, isDone});
+    console.log("Stored : " + dueDate.toJSON + " in listId " + listId + " and todo " + todoId);
+    return this.afs.doc(`lists/${listId}/todos/${todoId}`).set({name, description, isDone, dueDate});
   }
  public deleteList(id: string): Promise<void> {
     return this.afs.doc(`lists/${id}`).delete();
