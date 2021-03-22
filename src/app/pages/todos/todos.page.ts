@@ -6,7 +6,11 @@ import { AuthService } from 'src/app/services/user/auth.service';
 import { Todo } from 'src/models/todo';
 import { ModalController, NavController } from '@ionic/angular';
 import { CreateTodoComponent } from '../../components/create-todo/create-todo.component';
+import { Plugins, CameraResultType, Capacitor, FilesystemDirectory, 
+  CameraPhoto, CameraSource } from '@capacitor/core';
+import { PhotoService } from '../../services/photo/photo.service';
 
+const { Camera, Filesystem, Storage } = Plugins;
 @Component({
   selector: 'app-todos',
   templateUrl: './todos.page.html',
@@ -17,7 +21,8 @@ export class TodosPage implements OnInit {
   private mListId : string;
   private hasWritePermission : boolean;
   public todos : Todo[];
-  constructor(public location: Location, private modalController: ModalController,private activatedRoute : ActivatedRoute, private authService : AuthService, private firestoreService : FirestoreService) { }
+  public photo : any;
+  constructor(public photoService: PhotoService, public location: Location, private modalController: ModalController,private activatedRoute : ActivatedRoute, private authService : AuthService, private firestoreService : FirestoreService) { }
 
   ngOnInit() {
 
@@ -54,5 +59,11 @@ export class TodosPage implements OnInit {
   onBack() {
     this.location.back();
   }
+
+
+  addPhotoToGallery() {
+    this.photoService.addNewToGallery();
+  }
+  
 
 }

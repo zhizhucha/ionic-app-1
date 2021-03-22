@@ -19,11 +19,14 @@
     
 </ion-item-sliding>
 
-
-
+<ion-img [src]="photo?.webviewPath"></ion-img>
+<ion-col size="6" 
+  *ngFor="let photo of photoService.photos; index as position">
+    <ion-img [src]="photo.webviewPath"></ion-img>
+</ion-col>
 
 <ion-button expand="block" color="dark" (click)="presentAddTodoModal()" *ngIf="hasWritePermission">Create Todo</ion-button>
-
+<ion-button (click)="addPhotoToGallery()">Take Photo</ion-button>
 </ion-content>
 
 
