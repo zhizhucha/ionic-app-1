@@ -15,7 +15,7 @@ import {AlertController} from '@ionic/angular';
 })
 export class HomePage implements OnInit{
   lists: List[];
-  userEmail : string;
+  userEmail: string;
 
 
   constructor(
@@ -25,12 +25,9 @@ export class HomePage implements OnInit{
               ) {
   }
 
-  ngOnInit(): void {
+  ngOnInit(): void {}
 
-    //const isLoggedIn = this.authService.isLoggedIn;
-    //console.log(this.authService.getCurrentUser());
-
-
+  ionViewWillEnter(): void {
     if (this.authService.isLoggedIn) {
       this.userEmail = this.authService.getCurrentUser().email;
       this.firestoreService.getLists(this.authService.getCurrentUser()).subscribe( (data: List[]) => {

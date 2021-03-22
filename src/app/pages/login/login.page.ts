@@ -28,7 +28,7 @@ export class LoginPage implements OnInit {
         password: this.loginForm.get('password').value
       };
       await this.authService.doLogin(credentials);
-      await this.router.navigate(['/home']);
+      await this.router.navigate(['home']);
     }
     catch (e) {
       const toastException = await this.toastControl.create({
@@ -38,19 +38,19 @@ export class LoginPage implements OnInit {
     }
   }
 
-  async openToast() {   
-    const toast = await this.toastControl.create({  
-      message: 'You are now connected',  
+  async openToast() {
+    const toast = await this.toastControl.create({
+      message: 'You are now connected',
       animated: true,
       duration: 2000,
-      position: 'bottom',  
+      position: 'bottom',
       translucent: true,
       color: "success"
-    });  
-    toast.present();  
-    toast.onDidDismiss().then((val) => {  
-      console.log('Toast Dismissed');   
-    });  
+    });
+    toast.present();
+    toast.onDidDismiss().then((val) => {
+      console.log('Toast Dismissed');
+    });
   }
 
   onGoogleSignIn(): void{

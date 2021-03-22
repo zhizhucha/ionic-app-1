@@ -30,7 +30,6 @@ export class AuthService {
           .then(
               res => {
                 this.setCurrentUser(res.user);
-                // console.log(this.afAuth.authState);
                 resolve(res);
               },
               err => reject(err)
@@ -63,8 +62,8 @@ export class AuthService {
     return await this.afAuth.sendPasswordResetEmail(mEmail);
   }
 
-  getCurrentUser() : User.User{
-    if(this.user === undefined)
+  getCurrentUser(): User.User{
+    if (this.user === undefined)
     {
         this.user = JSON.parse(localStorage.getItem('user'));
 
@@ -101,7 +100,7 @@ export class AuthService {
   }
 
   async doSignOut(): Promise<any> {
-    return new Promise<any>(() => { 
+    return new Promise<any>(() => {
       this.user = undefined;
       this.afAuth.signOut();
     });
