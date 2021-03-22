@@ -1,0 +1,30 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Add users</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form>
+    <ion-list>
+      <ion-item *ngFor="let entry of addUsersFormGroup">
+        <ion-label>{{entry.val}}</ion-label>
+        <ion-checkbox slot="start" [(ngModel)]="entry.isChecked"></ion-checkbox>
+      </ion-item>
+    </ion-list>
+
+    <ion-row>
+      <ion-col>
+        <ion-button type="button" color="success" expand="block" (click)='addUsers()'>Add users</ion-button>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col>
+        <ion-button type="button" color="warning" expand="block" (click)='backToLists()'>Back</ion-button>
+      </ion-col>
+    </ion-row>
+  </form>
+</ion-content>
+
+

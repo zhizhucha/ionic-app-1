@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './services/user/auth.guard';
+import {AddUsersToListModule} from './components/add-users-to-list/add-users-to-list.module';
 
 const routes: Routes = [
   {
@@ -29,6 +30,10 @@ const routes: Routes = [
     path: 'todos',
     loadChildren: () => import('./pages/todos/todos.module').then( m => m.TodosPageModule)
   },
+  {
+    path: 'addUsersToList',
+    loadChildren: () => import('./components/add-users-to-list/add-users-to-list.module').then(m => AddUsersToListModule)
+  }
 ];
 
 @NgModule({
