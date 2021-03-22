@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {FirestoreService} from '../../services/data/firestore.service';
+import {FirebaseAdminService} from '../../services/admin/firebase-admin.service';
 
 @Component({
   selector: 'app-add-users-to-list',
@@ -11,9 +11,11 @@ export class AddUsersToListComponent implements OnInit {
     {val: 'Gaia'}, {val: 'Hermes'}, {val: 'Odin'}
   ];
 
-  constructor(private firestore: FirestoreService) { }
+  constructor(private firebaseAdmin: FirebaseAdminService) { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    console.log(this.firebaseAdmin.getUsers());
+  }
 
   addUsers() {
 
