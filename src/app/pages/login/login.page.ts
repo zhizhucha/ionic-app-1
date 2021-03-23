@@ -47,7 +47,7 @@ export class LoginPage implements OnInit {
       translucent: true,
       color: "success"
     });
-    toast.present();
+    await toast.present();
     toast.onDidDismiss().then((val) => {
       console.log('Toast Dismissed');
     });

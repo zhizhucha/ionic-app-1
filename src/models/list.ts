@@ -4,6 +4,7 @@ export class List {
     id: string;
     name: string;
     creator: string;
+    canRead: any;
     todos: Todo[];
 
     constructor(name: string, owner: string) {
@@ -11,5 +12,6 @@ export class List {
         this.name = name;
         this.creator = owner;
         this.todos = [];
+        this.canRead = [];
     }
 }

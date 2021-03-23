@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {Router, ActivatedRoute} from '@angular/router';
 import {FirestoreService} from '../../services/data/firestore.service';
+import {AlertController, ToastController} from '@ionic/angular';
 
 @Component({
   selector: 'app-add-users-to-list',
@@ -16,8 +17,8 @@ export class AddUsersToListComponent implements OnInit {
   formIsValid: boolean;
   listId: string;
 
-  constructor(private fb: FormBuilder, private router: Router,
-              private firestoreService: FirestoreService, private activatedRoute: ActivatedRoute) { }
+  constructor(private fb: FormBuilder, private router: Router, private alertController: AlertController,
+              private firestoreService: FirestoreService, private activatedRoute: ActivatedRoute, private toastControl: ToastController) { }
 
   ngOnInit() {
     this.listId = this.activatedRoute.snapshot.params.listId;
@@ -31,18 +32,29 @@ export class AddUsersToListComponent implements OnInit {
     this.formIsValid = false;
   }
 
-  addUsers() {
+  async addUsers() {
     this.formIsValid = this.validateAddUsersFormGroup();
     if (this.formIsValid) {
       const users = [
-        {user1: this.addUsersFormGroup.get('user1Email').value},
-        {user2: this.addUsersFormGroup.get('user2Email').value},
-        {user3: this.addUsersFormGroup.get('user3Email').value}
+        {user: this.addUsersFormGroup.get('user1Email').value},
+        {user: this.addUsersFormGroup.get('user2Email').value},
+        {user: this.addUsersFormGroup.get('user3Email').value}
       ];
-      this.firestoreService.addUsersToList(this.listId, users);
+      this.firestoreService.addUsersToList(this.listId, users).then(async () => {
+        const toastSuccess = await this.toastControl.create({
+          color: 'success', duration: 5000,
+          message: `Users granted read access to the list`
+        });
+        await toastSuccess.present();
+        this.backToHome();
+      });
     }
     else {
-
+      const alert = await this.alertController.create({
+        message: 'Verify the order of the emails entered before adding the user(s).',
+        buttons: ['OK']
+      });
+      await alert.present();
     }
   }
 

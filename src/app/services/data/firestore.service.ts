@@ -62,9 +62,27 @@ export class FirestoreService {
     return todoDoc.delete();
   }
 
-  public addUsersToList(listId: string, users: any) {
-    console.log(listId);
-    console.log(users);
+  /**
+   * Grants between 1 and 3 users read access to a list by adding them to the canRead field of the list document
+   * @param listId the list document
+   * @param users the users that have read access to the list
+   */
+  public addUsersToList(listId: string, users: any): Promise<void> {
+    const user3 = users[2].user;
+    if (user3 !== '') {
+      const user3Id = this.afs.createId();
+      this.afs.doc(`lists/${listId}/canRead/${user3Id}`).set({user3});
+    }
+
+    const user2 = users[1].user;
+    if (user2 !== '') {
+      const user2Id = this.afs.createId();
+      this.afs.doc(`lists/${listId}/canRead/${user2Id}`).set({user2});
+    }
+
+    const user1 = users[0].user;
+    const user1Id = this.afs.createId();
+    return this.afs.doc(`lists/${listId}/canRead/${user1Id}`).set({user1});
   }
 
 }
