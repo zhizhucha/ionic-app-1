@@ -14,19 +14,15 @@
     <ion-item-option *ngIf="hasWritePermission == true" (click)="onRemoveTodo(mtodo.id);"><ion-icon name="trash" size="large"></ion-icon></ion-item-option>
   </ion-item-options>
   <ion-item >
-    <app-todo-card  style="width:100%;" [title]="mtodo.name" [description]="mtodo.description" [isDone]="mtodo.isDone" [dueDate]="mtodo.dueDate"> </app-todo-card>
+    <app-todo-card  style="width:100%;" [listId]="mListId" [hasImg]="mtodo.hasImg" [todoId]="mtodo.id" [title]="mtodo.name" [description]="mtodo.description" [isDone]="mtodo.isDone" [dueDate]="mtodo.dueDate"> </app-todo-card>
   </ion-item>
     
 </ion-item-sliding>
 
-<ion-img [src]="photo?.webviewPath"></ion-img>
-<ion-col size="6" 
-  *ngFor="let photo of photoService.photos; index as position">
-    <ion-img [src]="photo.webviewPath"></ion-img>
-</ion-col>
+
 
 <ion-button expand="block" color="dark" (click)="presentAddTodoModal()" *ngIf="hasWritePermission">Create Todo</ion-button>
-<ion-button (click)="addPhotoToGallery()">Take Photo</ion-button>
+
 </ion-content>
 
 

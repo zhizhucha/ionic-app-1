@@ -1,3 +1,4 @@
+import { UploadImageComponent } from './../../components/upload-image/upload-image/upload-image.component';
 import { CreateTodoComponent } from './../../components/create-todo/create-todo.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -18,6 +19,6 @@ import { TodoCardComponent } from 'src/app/components/todo-card/todo-card.compon
     TodosPageRoutingModule,
     ReactiveFormsModule
   ],
-  declarations: [TodosPage, TodoCardComponent, CreateTodoComponent]
+  declarations: [TodosPage, TodoCardComponent, CreateTodoComponent ,UploadImageComponent]
 })
 export class TodosPageModule {}

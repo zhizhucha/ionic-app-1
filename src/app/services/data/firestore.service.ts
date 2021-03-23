@@ -1,3 +1,4 @@
+import { AngularFireStorage } from '@angular/fire/storage';
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Observable } from 'rxjs/internal/Observable';
@@ -10,7 +11,7 @@ import { Todo } from '../../../models/todo';
 })
 export class FirestoreService {
 
-  constructor(private afs: AngularFirestore) { }
+  constructor(private afs: AngularFirestore, private afsStorage : AngularFireStorage) { }
 
   public createList(name: string, creator: string): Promise<void> {
     const listId = this.afs.createId();
@@ -41,7 +42,13 @@ export class FirestoreService {
     return this.afs.doc(`lists/${listId}/todos/${todoId}`).set({name, description, isDone, dueDate});
   }
  public deleteList(id: string): Promise<void> {
-    return this.afs.doc(`lists/${id}`).delete();
+    const listDoc = this.afs.doc(`lists/${id}`);
+    const fileStoragePath = `filesStorage/${id}/`;
+      console.log("deleting folder =" + fileStoragePath);
+      this.afsStorage.ref(fileStoragePath).listAll().forEach(item => {
+          this.afsStorage.ref(item['location']['path']).delete()
+        });
+    return listDoc.delete();
   }
   /**
    * Deleting a Todo inside a list
@@ -52,6 +59,12 @@ export class FirestoreService {
   public deleteTodo(listId: string, todoId : string) : Promise<void> {
     const todoDoc = this.afs.doc<Todo>(`lists/${listId}/todos/${todoId}`);
     return todoDoc.delete();
+  }
+
+
+  public updateImage(listId: string, todoId: string, hasImg : boolean) : Promise<void> {
+    const todoDoc = this.afs.doc<Todo>(`lists/${listId}/todos/${todoId}`);
+    return todoDoc.update({hasImg});
   }
 
 

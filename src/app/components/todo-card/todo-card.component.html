@@ -2,7 +2,7 @@
 
     
      
-      <ion-card color="primary" >
+  <ion-card color="primary" >
     <ion-card-header color="secondary" class="ion-margin-bottom">
         <ion-title class="ion-margin-end ">{{title}}</ion-title>
     </ion-card-header>
@@ -21,6 +21,9 @@
       <ion-label>Is finished </ion-label>
       <ion-checkbox disabled color="dark" checked="false"></ion-checkbox>
     </ion-card-content>
+    <ion-label>IMGID : {{hasImg}} </ion-label>
+    <ion-img *ngIf="hasImg" [src]="imgUrl" style="width:50%" ></ion-img>
+    <ion-button (click)="addPhotoToGallery()">Take Photo</ion-button>
   </ion-card>
 
 

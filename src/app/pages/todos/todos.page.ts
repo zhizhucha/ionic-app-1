@@ -1,3 +1,4 @@
+import { UploadImageComponent } from './../../components/upload-image/upload-image/upload-image.component';
 import { FirestoreService } from './../../services/data/firestore.service';
 import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
@@ -61,9 +62,6 @@ export class TodosPage implements OnInit {
   }
 
 
-  addPhotoToGallery() {
-    this.photoService.addNewToGallery();
-  }
-  
+
 
 }
