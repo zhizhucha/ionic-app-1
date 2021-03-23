@@ -4,7 +4,7 @@ export class List {
     id: string;
     name: string;
     creator: string;
-    canRead: any;
+    canRead: string[];
     todos: Todo[];
 
     constructor(name: string, owner: string) {

@@ -1,9 +1,11 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
+import { combineLatest, merge } from 'rxjs';
 import { Observable } from 'rxjs/internal/Observable';
 import User from '../../../../node_modules/firebase';
 import { Todo } from '../../../models/todo';
-
+import { map  } from 'rxjs/operators';
+import { zip } from 'rxjs'
 @Injectable({
   providedIn: 'root'
 })
@@ -27,7 +29,9 @@ export class FirestoreService {
    */
   public getLists(user: User.User): Observable<any[]> {
     console.log('Getting lists');
-    return this.afs.collection<any>('lists', ref => ref.where('creator', '==', user.email)).valueChanges( {idField: 'id'});
+    const creatorLists  = this.afs.collection<any>('lists', ref =>ref.where('creator', '==', user.email)).valueChanges( {idField: 'id'});
+    const guessLists = this.afs.collection<any>('lists', ref =>ref.where('canRead' , 'array-contains' , user.email )).valueChanges( {idField: 'id'});
+    return zip(creatorLists, guessLists).pipe(map(x => x[0].concat(x[1]))); //merge(creatorLists, guessLists);
   }
 
   /**
@@ -66,22 +70,11 @@ export class FirestoreService {
    * @param listId the list document
    * @param users the users that have read access to the list
    */
-  public addUsersToList(listId: string, users: any): Promise<void> {
-    const user3 = users[2].user;
-    if (user3 !== '') {
-      const user3Id = this.afs.createId();
-      this.afs.doc(`lists/${listId}/canRead/${user3Id}`).set({user3});
-    }
-
-    const user2 = users[1].user;
-    if (user2 !== '') {
-      const user2Id = this.afs.createId();
-      this.afs.doc(`lists/${listId}/canRead/${user2Id}`).set({user2});
-    }
-
-    const user1 = users[0].user;
-    const user1Id = this.afs.createId();
-    return this.afs.doc(`lists/${listId}/canRead/${user1Id}`).set({user1});
+  public addUsersToList(listId: string, canReadEmails: any): Promise<void> {
+    console.log("Lenght array to add = " + canReadEmails.length);
+    return this.afs.doc(`lists/${listId}`).update({"canRead" : canReadEmails});
   }
 
 }
+
+

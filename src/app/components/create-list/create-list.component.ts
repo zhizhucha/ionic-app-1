@@ -42,8 +42,6 @@ export class CreateListComponent implements OnInit {
   }
 
   ngOnInit() {
-
-
     this.user = this.authService.getCurrentUser();
   }
 

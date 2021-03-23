@@ -36,9 +36,9 @@ export class AddUsersToListComponent implements OnInit {
     this.formIsValid = this.validateAddUsersFormGroup();
     if (this.formIsValid) {
       const users = [
-        {user: this.addUsersFormGroup.get('user1Email').value},
-        {user: this.addUsersFormGroup.get('user2Email').value},
-        {user: this.addUsersFormGroup.get('user3Email').value}
+        this.addUsersFormGroup.get('user1Email').value,
+        this.addUsersFormGroup.get('user2Email').value,
+        this.addUsersFormGroup.get('user3Email').value
       ];
       this.firestoreService.addUsersToList(this.listId, users).then(async () => {
         const toastSuccess = await this.toastControl.create({
