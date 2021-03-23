@@ -1,27 +1,35 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Add users</ion-title>
+    <ion-title>Add users via email</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <form>
-    <ion-list>
-      <ion-item *ngFor="let entry of addUsersFormGroup">
-        <ion-label>{{entry.val}}</ion-label>
-        <ion-checkbox slot="start" [(ngModel)]="entry.isChecked"></ion-checkbox>
-      </ion-item>
-    </ion-list>
+  <form [formGroup]="addUsersFormGroup">
+    <ion-item>
+      <ion-label position="floating">Email 1</ion-label>
+      <ion-input type="email" formControlName="user1Email" placeholder="Email of first user"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Email 2</ion-label>
+      <ion-input type="email" formControlName="user2Email" placeholder="Email of second user"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Email 3</ion-label>
+      <ion-input type="email" formControlName="user3Email" placeholder="Email of third user"></ion-input>
+    </ion-item>
 
     <ion-row>
       <ion-col>
-        <ion-button type="button" color="success" expand="block" (click)='addUsers()'>Add users</ion-button>
+        <ion-button type="button" [disabled]="addUsersFormGroup.invalid" color="success" expand="block" (click)='addUsers()'>Add users</ion-button>
       </ion-col>
     </ion-row>
 
     <ion-row>
       <ion-col>
-        <ion-button type="button" color="warning" expand="block" (click)='backToLists()'>Back</ion-button>
+        <ion-button type="button" color="danger" expand="block" (click)="backToHome()">Back</ion-button>
       </ion-col>
     </ion-row>
   </form>
