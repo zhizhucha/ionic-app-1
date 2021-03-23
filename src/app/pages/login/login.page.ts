@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { AuthService } from '../../services/user/auth.service';
-import {ToastController} from '@ionic/angular';
+import {AlertController, ToastController} from '@ionic/angular';
 import {Router} from '@angular/router';
 
 @Component({
@@ -16,7 +16,7 @@ export class LoginPage implements OnInit {
   });
 
   constructor(private fb: FormBuilder, private authService: AuthService, private router: Router,
-              private toastControl: ToastController) { }
+              private toastControl: ToastController, private alertController: AlertController) { }
 
   ngOnInit() {
   }
@@ -27,8 +27,19 @@ export class LoginPage implements OnInit {
         email: this.loginForm.get('email').value,
         password: this.loginForm.get('password').value
       };
-      await this.authService.doLogin(credentials);
-      await this.router.navigate(['home']);
+      const user = await this.authService.doLogin(credentials);
+      if (user.user.emailVerified) {
+        await this.router.navigate(['home']);
+      }
+      else {
+        const alert = await this.alertController.create({
+          header: 'Login error',
+          message: `Verify your account using the link sent to ${credentials.email} before logging in.`,
+          buttons: [{text: 'OK', role: 'cancel', handler: () => {}}]
+        });
+        await alert.present();
+        await this.authService.doSignOut();
+      }
     }
     catch (e) {
       const toastException = await this.toastControl.create({
