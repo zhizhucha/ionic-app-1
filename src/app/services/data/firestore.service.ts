@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Observable } from 'rxjs/internal/Observable';
-import { List } from '../../../models/list';
 import User from '../../../../node_modules/firebase';
 import { Todo } from '../../../models/todo';
 
