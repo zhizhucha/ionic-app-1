@@ -16,7 +16,7 @@ export class CreateListComponent implements OnInit {
   public listForm : FormGroup;
   listName: FormControl;
   isSubmitted = false;
-  
+
   validation_messages = {
     'name': [
         { type: 'required', message: 'Username is required.' },
@@ -27,23 +27,23 @@ export class CreateListComponent implements OnInit {
       ],
 
     }
-  
+
 
   constructor(private fb: FormBuilder,
               public modalController: ModalController,
               private authService: AuthService,
-              private firestoreService: FirestoreService) { 
+              private firestoreService: FirestoreService) {
 
       this.listName = new FormControl("Default LIstName", [ Validators.required]);
       this.listForm = new FormGroup({
         listName: this.listName
       });
-  
+
   }
 
   ngOnInit() {
-    
-    
+
+
     this.user = this.authService.getCurrentUser();
   }
 
@@ -58,14 +58,14 @@ export class CreateListComponent implements OnInit {
 
       () => {
         console.log("Creating----> " );
-        
+
         this.modalController.dismiss(
           {dismiss: true}
         );
 
       }
 
-     
+
     );
     }
 
@@ -77,25 +77,28 @@ export class CreateListComponent implements OnInit {
         console.log('Please provide all the required values!')
         //return false;
       } else {
-        
+
         this.firestoreService.createList(this.listForm.get("listName").value, this.user.email).then(
 
           () => {
             console.log("Creating----> " );
-            
+
             this.modalController.dismiss(
               {dismiss: true}
             );
-    
+
           }
-    
-         
+
+
         );
       }
     }
 
+  closeModal() {
+    this.modalController.dismiss({dismiss: true});
+  }
 
-    
+
 
 
 }

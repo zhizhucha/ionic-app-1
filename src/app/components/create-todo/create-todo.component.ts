@@ -28,7 +28,7 @@ export class CreateTodoComponent implements OnInit {
   constructor(private fb: FormBuilder,
       public modalController: ModalController,
       private authService: AuthService,
-      private firestoreService: FirestoreService) { 
+      private firestoreService: FirestoreService) {
 
     this.todoName = new FormControl('', [ Validators.required]);
     this.todoDescription = new FormControl('', [ Validators.required]);
@@ -70,7 +70,7 @@ export class CreateTodoComponent implements OnInit {
     } else {
       console.log(" The list ID when creating todo : " + this.listId);
       console.log("This date for the task : " + this.todoForm.get("dueDate").value);
-      this.firestoreService.createTodo(this.listId, this.todoForm.get("todoName").value, 
+      this.firestoreService.createTodo(this.listId, this.todoForm.get("todoName").value,
                                       this.todoForm.get("todoDescription").value,
                                       this.todoForm.get("dueDate").value
                                       ).then(
@@ -80,15 +80,18 @@ export class CreateTodoComponent implements OnInit {
           this.modalController.dismiss(
             {dismiss: true}
           );
-  
+
         },
         (err) =>{
           console.log(" Error  ; " + err);
         }
-  
-       
+
+
       );
     }
   }
 
+  closeModal() {
+    this.modalController.dismiss({dismiss: true});
+  }
 }

@@ -2,7 +2,7 @@
   <ion-toolbar>
     <ion-title  slot="primary">todos</ion-title>
     <ion-button slot="start" color="light" (click)="onBack();">  <ion-icon name="arrow-back" class="padding-end"></ion-icon>Back</ion-button>
-   
+
   </ion-toolbar>
 
 </ion-header>
@@ -16,13 +16,13 @@
   <ion-item >
     <app-todo-card  style="width:100%;" [title]="mtodo.name" [description]="mtodo.description" [isDone]="mtodo.isDone" [dueDate]="mtodo.dueDate"> </app-todo-card>
   </ion-item>
-    
+
 </ion-item-sliding>
 
 
 
 
-<ion-button expand="block" color="dark" (click)="presentAddTodoModal()" *ngIf="hasWritePermission">Create Todo</ion-button>
+<ion-button expand="block" color="success" (click)="presentAddTodoModal()" *ngIf="hasWritePermission">Create Todo</ion-button>
 
 </ion-content>
 
