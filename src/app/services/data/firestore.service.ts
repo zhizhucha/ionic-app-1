@@ -62,5 +62,9 @@ export class FirestoreService {
     return todoDoc.delete();
   }
 
+  public addUsersToList(listId: string, users: any) {
+    console.log(listId);
+    console.log(users);
+  }
 
 }
