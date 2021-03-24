@@ -14,7 +14,7 @@ export class TodoCardComponent implements OnInit {
   @Input() title : string;
   @Input() description : string;
   @Input() isDone : boolean;
-  @Input() dueDate : string;
+  @Input() dueDate : Date;
   @Input() canWrite : boolean;
   @Input() listId : string;
   @Input() todoId : string;
@@ -27,8 +27,7 @@ export class TodoCardComponent implements OnInit {
 
   
   ngOnInit() {
-   // console.log("Compoenent has permission ");
-    //this.dueDate = null;
+
     this.isDone2 = this.isDone;
 
   }
@@ -59,7 +58,6 @@ export class TodoCardComponent implements OnInit {
     });
     await toast.present();
     toast.onDidDismiss().then((val) => {
-      //console.log('Toast Dismissed');
     });
   }
 

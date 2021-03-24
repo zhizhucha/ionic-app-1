@@ -15,8 +15,8 @@ import { List } from 'src/models/list';
 })
 export class TodosPage implements OnInit {
 
-  private mListId : string;
-  private hasWritePermission : boolean;
+  public mListId : string;
+  public hasWritePermission : boolean;
   private dirtyUdpate : boolean;
   public todos : Todo[];
   constructor(public location: Location, private modalController: ModalController,private activatedRoute : ActivatedRoute, private authService : AuthService, private firestoreService : FirestoreService) { }
