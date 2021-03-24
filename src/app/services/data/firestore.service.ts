@@ -6,6 +6,7 @@ import User from '../../../../node_modules/firebase';
 import { Todo } from '../../../models/todo';
 import { map  } from 'rxjs/operators';
 import { zip } from 'rxjs'
+import { List } from 'src/models/list';
 @Injectable({
   providedIn: 'root'
 })
@@ -34,6 +35,10 @@ export class FirestoreService {
     return zip(creatorLists, guessLists).pipe(map(x => x[0].concat(x[1]))); //merge(creatorLists, guessLists);
   }
 
+  public getOneList(listId: string) : Observable<List> {
+    return this.afs.doc<List>(`lists/${listId}`).valueChanges( {idField: 'id'});
+  }
+
   /**
    * Recuperation des todo associés à une liste
    */
@@ -51,9 +56,16 @@ export class FirestoreService {
     console.log("Stored : " + dueDate.toJSON + " in listId " + listId + " and todo " + todoId);
     return this.afs.doc(`lists/${listId}/todos/${todoId}`).set({name, description, isDone, dueDate});
   }
- public deleteList(id: string): Promise<void> {
+
+  public updateTodoStatus(listId: string, todoId : string, isDone : boolean){
+    const todoDoc = this.afs.doc(`lists/${listId}/todos/${todoId}`);
+    return todoDoc.update( {"isDone" : isDone});
+  }
+
+  public deleteList(id: string): Promise<void> {
     return this.afs.doc(`lists/${id}`).delete();
   }
+
   /**
    * Deleting a Todo inside a list
    * @param listId

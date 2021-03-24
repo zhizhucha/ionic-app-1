@@ -34,7 +34,7 @@ export class CreateListComponent implements OnInit {
               private authService: AuthService,
               private firestoreService: FirestoreService) {
 
-      this.listName = new FormControl("Default LIstName", [ Validators.required]);
+      this.listName = new FormControl("", [ Validators.required]);
       this.listForm = new FormGroup({
         listName: this.listName
       });

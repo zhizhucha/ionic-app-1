@@ -1,11 +1,11 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title  slot="primary">todos</ion-title>
-    <ion-button slot="start" color="light" (click)="onBack();">  <ion-icon name="arrow-back" class="padding-end"></ion-icon>Back</ion-button>
 
+<ion-header [translucent]="true">
+  <ion-toolbar color="secondary">
+    <ion-title>Todo Lists</ion-title>
+    <ion-button slot="start"  (click)="onBack();">  <ion-icon name="arrow-back" class="padding-end"></ion-icon>Back</ion-button>
   </ion-toolbar>
-
 </ion-header>
+
 
 <ion-content>
 <ion-item-sliding *ngFor="let mtodo of todos"  >
@@ -14,7 +14,7 @@
     <ion-item-option *ngIf="hasWritePermission == true" (click)="onRemoveTodo(mtodo.id);"><ion-icon name="trash" size="large"></ion-icon></ion-item-option>
   </ion-item-options>
   <ion-item >
-    <app-todo-card  style="width:100%;" [title]="mtodo.name" [description]="mtodo.description" [isDone]="mtodo.isDone" [dueDate]="mtodo.dueDate"> </app-todo-card>
+    <app-todo-card  style="width:100%;" [title]="mtodo.name" [description]="mtodo.description" [todoId]="mtodo.id" [listId]="mListId" [isDone]="mtodo.isDone" [dueDate]="mtodo.dueDate" [canWrite]="hasWritePermission"> </app-todo-card>
   </ion-item>
 
 </ion-item-sliding>

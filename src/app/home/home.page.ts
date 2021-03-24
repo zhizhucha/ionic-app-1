@@ -48,7 +48,9 @@ export class HomePage implements OnInit{
     const modal = await this.modalController.create({
       component: CreateListComponent
     });
-    return await modal.present();
+    await modal.present();
+    this.reloadLists();
+    
   }
 
 
