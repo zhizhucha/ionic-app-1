@@ -2,7 +2,6 @@ import { ToastController } from '@ionic/angular';
 import { FirestoreService } from './../../services/data/firestore.service';
 import { AuthService } from './../../services/user/auth.service';
 import { Component, Input, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-todo-card',
@@ -20,7 +19,8 @@ export class TodoCardComponent implements OnInit {
   @Input() todoId : string;
 
   public isDue : boolean;
-  
+  public isDueToday : boolean;
+
   isDone2 : boolean;
   constructor(public fsService : FirestoreService, public toastControl : ToastController) { 
     
@@ -30,6 +30,13 @@ export class TodoCardComponent implements OnInit {
   ngOnInit() {
 
     this.isDone2 = this.isDone;
+
+    let fixedDueDate = new Date((new Date(this.dueDate).toDateString()));
+    
+    const fixedCurDate = new Date(new Date().toDateString());
+    this.isDueToday = fixedCurDate.getTime() == fixedDueDate.getTime();
+    this.isDue = fixedCurDate.getTime() > fixedDueDate.getTime();
+    
 
   }
 

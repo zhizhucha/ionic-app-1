@@ -20,8 +20,10 @@
           <ion-col col-3 text-center>
             <ion-label>Due Date</ion-label>
           </ion-col>
-          <ion-col text-center>
+          <ion-col text-center >
               <ion-input  class="mContent" disabled>{{dueDate | date: 'dd/MM/YYYY'}}</ion-input>
+              <ion-button type="button" disabled *ngIf="isDueToday"  color="warning"> DUE TODAY</ion-button>
+              <ion-button type="button" disabled *ngIf="isDue"  color="danger"> DUE TODAY</ion-button>
           </ion-col>
         </ion-row>
         <ion-row  >

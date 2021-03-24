@@ -11,3 +11,26 @@ ion-label {
     
 }
 
+.warnLabel{
+    text-align: center;
+    padding:no;
+    font-weight: bolder;
+    background-color: rgb(121, 121, 132);
+
+    border-radius: 25px;
+    border: 2px solid #73AD21;
+    padding: 1px;
+ 
+}
+
+.errorLabel{
+    text-align: center;
+    padding:no;
+    font-weight: bolder;
+    background-color: rgb(121, 121, 132);
+
+    border-radius: 25px;
+    border: 2px solid #73AD21;
+    padding: 1px;
+ 
+}
