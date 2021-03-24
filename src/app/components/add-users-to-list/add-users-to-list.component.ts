@@ -1,8 +1,8 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {Router, ActivatedRoute} from '@angular/router';
 import {FirestoreService} from '../../services/data/firestore.service';
-import {AlertController, ToastController} from '@ionic/angular';
+import {AlertController, ModalController, ToastController} from '@ionic/angular';
 
 @Component({
   selector: 'app-add-users-to-list',
@@ -11,24 +11,33 @@ import {AlertController, ToastController} from '@ionic/angular';
 })
 export class AddUsersToListComponent implements OnInit {
   
-  
-  
+
+  @Input() listId : string;
+  @Input() canReadArray : string[];
+
   addUsersFormGroup: FormGroup;
   user1Email: FormControl;
   user2Email: FormControl;
   user3Email: FormControl;
   formIsValid: boolean;
-  listId: string;
+  //listId: string;
 
-  constructor(private fb: FormBuilder, private router: Router, private alertController: AlertController,
+  constructor(private fb: FormBuilder, private router: Router, private alertController: AlertController, public modalController: ModalController,
               private firestoreService: FirestoreService, private activatedRoute: ActivatedRoute, private toastControl: ToastController) { }
 
   ngOnInit() {
-    this.listId = this.activatedRoute.snapshot.params.listId;
-
-    this.user1Email = new FormControl('', [Validators.email, Validators.required]);
-    this.user2Email = new FormControl('', [Validators.email]);
-    this.user3Email = new FormControl('', [Validators.email]);
+    //this.listId = this.activatedRoute.snapshot.params.listId;
+    console.log("CanRead : " + JSON.stringify(this.canReadArray));
+    if(this.canReadArray !== undefined){
+      this.user1Email = new FormControl(this.canReadArray[0], [Validators.email, Validators.required]);
+      this.user2Email = new FormControl(this.canReadArray[1], [Validators.email]);
+      this.user3Email = new FormControl(this.canReadArray[2], [Validators.email]);
+    }else{
+      this.user1Email = new FormControl('', [Validators.email, Validators.required]);
+      this.user2Email = new FormControl('', [Validators.email]);
+      this.user3Email = new FormControl('', [Validators.email]);
+    }
+   
     this.addUsersFormGroup = new FormGroup({
       user1Email: this.user1Email, user2Email: this.user2Email, user3Email: this.user3Email
     });
@@ -49,7 +58,10 @@ export class AddUsersToListComponent implements OnInit {
           message: `Users granted read access to the list`
         });
         await toastSuccess.present();
-        this.backToHome();
+        this.modalController.dismiss(
+          {dismiss: true}
+        );
+        //this.backToHome();
       });
     }
     else {

@@ -20,9 +20,9 @@
 </ion-item-sliding>
 
 
-<ion-label color="primary "><ion-icon name="warning" *ngIf="!hasWritePermission"></ion-icon>Only the creator of the list can add todo tasks</ion-label>
+<ion-label *ngIf="!hasWritePermission" color="primary "><ion-icon name="warning" *ngIf="!hasWritePermission"></ion-icon>Only the creator of the list can add todo tasks</ion-label>
 
-<ion-button expand="block" color="success"  [disabled]="!hasWritePermission" (click)="presentAddTodoModal()" *ngIf="hasWritePermission">Create Todo</ion-button>
+<ion-button expand="block" color="success"  [disabled]="!hasWritePermission" (click)="presentAddTodoModal()" >Create Todo</ion-button>
 
 </ion-content>
 

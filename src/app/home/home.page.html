@@ -37,7 +37,7 @@
 
     <ion-item-options side="end">
       <ion-item-option color="primary">
-        <ion-icon slot="icon-only" name="person-add-outline" [routerLink]="['/addUsersToList', l.id]" routerLinkActive="active"></ion-icon>
+        <ion-icon slot="icon-only" name="person-add-outline" (click)="showAddUsersListModal(l);" ></ion-icon>
       </ion-item-option>
       <ion-item-option color="danger">
         <ion-icon slot="icon-only" name="trash" (click)="delete(l?.id, l?.name)"></ion-icon>

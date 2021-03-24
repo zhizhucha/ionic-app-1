@@ -1,3 +1,4 @@
+import { AddUsersToListComponent } from './../components/add-users-to-list/add-users-to-list.component';
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/internal/Observable';
 import { AuthService } from '../services/user/auth.service';
@@ -46,9 +47,23 @@ export class HomePage implements OnInit{
    */
   async showNewListModal() {
     const modal = await this.modalController.create({
-      component: CreateListComponent
+      component: CreateListComponent,
     });
     await modal.present();
+    await modal.onDidDismiss();
+    this.reloadLists();
+    
+    
+  }
+
+
+  async showAddUsersListModal(curList : List) {
+    const modal = await this.modalController.create({
+      component: AddUsersToListComponent,
+      componentProps: { listId : curList.id, canReadArray : curList.canRead}
+    });
+    await modal.present();
+    await modal.onDidDismiss();
     this.reloadLists();
     
   }
@@ -95,11 +110,11 @@ export class HomePage implements OnInit{
 
 
 
-  reloadLists(){
-    this.lists = undefined;
+   reloadLists(){
+    //this.lists = undefined;
     if (this.authService.isLoggedIn) {
       this.userEmail = this.authService.getCurrentUser().email;
-      this.firestoreService.getLists(this.authService.getCurrentUser()).subscribe( (lists) => {
+       this.firestoreService.getLists(this.authService.getCurrentUser()).subscribe( (lists) => {
         this.lists = lists;
        })
     }

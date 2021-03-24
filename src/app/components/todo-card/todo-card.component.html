@@ -31,7 +31,7 @@
           <ion-col text-center>
   
             <ion-checkbox *ngIf="canWrite"  color="dark" value="{{isDone}}" [(ngModel)]="isDone"  (ionChange)="onUpdateCardStatus();" checked="false"></ion-checkbox>
-            <ion-checkbox *ngIf="!canWrite" disabled   title="You are not the creator of the list." color="dark" checked="false"></ion-checkbox>
+            <ion-checkbox *ngIf="!canWrite" disabled   tvalue="{{isDone}}"  [(ngModel)]="isDone" title="You are not the creator of the list." color="dark" checked="false"></ion-checkbox>
             
           </ion-col>
         </ion-row>
