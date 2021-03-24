@@ -49,30 +49,32 @@ export class LoginPage implements OnInit {
     }
   }
 
-  async openToast() {
+
+  onGoogleSignIn(): void{
+    this.authService.signInWithGoogle().then( () => {
+      this.openToast("You are now connected", true);
+      this.router.navigate([`/home`]);
+    }, (err : any) => {
+      console.log("Error google login : " + err);
+      this.openToast(err, false);
+    }
+    );
+
+  }
+
+  async openToast(msg : string, state : boolean) {
     const toast = await this.toastControl.create({
-      message: 'You are now connected',
+      message: msg,
       animated: true,
       duration: 2000,
       position: 'bottom',
       translucent: true,
-      color: "success"
+      color: state?"success":"danger"
     });
     await toast.present();
     toast.onDidDismiss().then((val) => {
       console.log('Toast Dismissed');
     });
-  }
-
-  onGoogleSignIn(): void{
-    this.authService.signInWithGoogle().then( () => {
-      this.openToast();
-      this.router.navigate([`/home`]);
-    }, (err : any) => {
-      console.log("Error google login : " + err);
-    }
-    );
-
   }
 
 }

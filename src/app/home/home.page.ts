@@ -1,6 +1,5 @@
 import { AddUsersToListComponent } from './../components/add-users-to-list/add-users-to-list.component';
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs/internal/Observable';
 import { AuthService } from '../services/user/auth.service';
 import {FirestoreService} from '../services/data/firestore.service';
 import { List } from '../../models/list';
@@ -79,7 +78,7 @@ export class HomePage implements OnInit{
     console.log("Delete from user : " + user.email);
 
     const alert = await this.alertController.create({
-      message: `Delete todo list "${name}" ?`,
+      message: `Are you sure you want to delete this list? `,
       buttons: [
         {
           text: 'Cancel', role: 'cancel', handler: () => {}
