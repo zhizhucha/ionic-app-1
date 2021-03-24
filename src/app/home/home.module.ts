@@ -1,3 +1,4 @@
+import { AddUsersToListComponent } from './../components/add-users-to-list/add-users-to-list.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
@@ -17,6 +18,6 @@ import { CreateListComponent } from '../components/create-list/create-list.compo
     FormsModule, 
     ReactiveFormsModule
   ],
-  declarations: [HomePage, CreateListComponent]
+  declarations: [HomePage, CreateListComponent, AddUsersToListComponent]
 })
 export class HomePageModule {}

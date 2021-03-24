@@ -87,7 +87,8 @@ export class AddUsersToListComponent implements OnInit {
     return user2 !== '' && user3 === '';
   }
 
-  backToHome() {
-    this.router.navigate(['home']);
+
+  closeModal() {
+    this.modalController.dismiss({dismiss: true});
   }
 }

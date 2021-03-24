@@ -20,6 +20,7 @@ export class TodoCardComponent implements OnInit {
   @Input() todoId : string;
 
   public isDue : boolean;
+  
   isDone2 : boolean;
   constructor(public fsService : FirestoreService, public toastControl : ToastController) { 
     
