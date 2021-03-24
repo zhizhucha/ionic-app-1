@@ -1,9 +1,10 @@
-# Web Application Projet : Todo Task Mangager
+# Web Application Projet : Todo Task Manager
 
 This project is developped with the stack ionic/angular/firestore, and is presented as a Todo web application. An android apk is included in the repository.
 
 
 ## Auteurs
+
 Quentin C. (zhizhucha),    Emeziem U.
 
 
