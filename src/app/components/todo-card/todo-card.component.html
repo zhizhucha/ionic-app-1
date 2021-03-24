@@ -2,44 +2,43 @@
 
     
      
-    <ion-card color="medium" >
-    <ion-card-header color="secondary" class="ion-margin-bottom">
+  <ion-card >
+    <ion-card-header color="tertiary" class="ion-margin-bottom">
         <ion-title class="ion-margin-end ">{{title}}</ion-title>
     </ion-card-header>
 
-    <ion-card-content>
-        <ion-row no padding>
-          <ion-col col-3 text-center>
-            <ion-label class="ion-margin-end">Description</ion-label>
-          </ion-col>
-          <ion-col  text-center>
-        <ion-input class="mContent" disabled>{{description}}</ion-input>
-          </ion-col>
-      </ion-row>
-    </ion-card-content>
-    <ion-card-content *ngIf="dueDate">
-        <ion-row no padding>
+    <ion-card-content  >
+          <ion-row no padding>
+            <ion-col col-3 text-center>
+              <ion-label class="ion-margin-end">Description</ion-label>
+            </ion-col>
+            <ion-col  text-center>
+          <ion-input class="mContent" disabled>{{description}}</ion-input>
+            </ion-col>
+        </ion-row>
+        <ion-row *ngIf="dueDate">
           <ion-col col-3 text-center>
             <ion-label>Due Date</ion-label>
           </ion-col>
           <ion-col text-center>
               <ion-input  class="mContent" disabled>{{dueDate | date: 'dd/MM/YYYY'}}</ion-input>
           </ion-col>
-          </ion-row>
-    </ion-card-content>
-    <ion-card-content>
-      <ion-row no padding>
-        <ion-col text-center>
-      <ion-label>Is finished </ion-label>
-    </ion-col>
-      <ion-col text-center>
+        </ion-row>
+        <ion-row  >
+          <ion-col text-center>
+              <ion-label>Is finished </ion-label>
+          </ion-col>
+          <ion-col text-center>
+  
+            <ion-checkbox *ngIf="canWrite"  color="dark" value="{{isDone}}" [(ngModel)]="isDone"  (ionChange)="onUpdateCardStatus();" checked="false"></ion-checkbox>
+            <ion-checkbox *ngIf="!canWrite" disabled   title="You are not the creator of the list." color="dark" checked="false"></ion-checkbox>
+            
+          </ion-col>
+        </ion-row>
 
-        <ion-checkbox *ngIf="canWrite"  color="dark" value="{{isDone}}" [(ngModel)]="isDone"  (ionChange)="onUpdateCardStatus();" checked="false"></ion-checkbox>
-        <ion-checkbox *ngIf="!canWrite" disabled   title="You are not the creator of the list." color="dark" checked="false"></ion-checkbox>
-        
-      </ion-col>
-      </ion-row>
     </ion-card-content>
+
+     
   </ion-card>
 
 
