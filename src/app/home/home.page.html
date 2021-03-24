@@ -1,6 +1,6 @@
 <ion-header [translucent]="true">
 
-  <ion-toolbar color="secondary">
+  <ion-toolbar color="primary">
 
 
     <ion-title>Todo Lists</ion-title>
@@ -28,11 +28,25 @@
 
 <ion-content [fullscreen]="true">
   <ion-item-sliding *ngFor="let l of lists">
+
+
+
+
     <ion-item [routerLink]="['/todos', l.id]" routerLinkActive="active">
-      <ion-label>
-        <h2>{{l?.name}}</h2>
-        <p>Created by {{l?.creator}}</p>
-      </ion-label>
+      <ion-card style="width:100%;" class="roundedBorder">
+      <ion-row style="width:100%;" >
+        <ion-col col-3 text-center>
+          <ion-item color="secondary">{{l?.name}}</ion-item>
+        </ion-col>
+      </ion-row>
+
+      <ion-row style="width:100%;">
+        <ion-col text-center >
+          <ion-item color="light">Created by {{l?.creator}}</ion-item>
+        </ion-col>
+      </ion-row>
+    </ion-card>
+      
     </ion-item>
 
     <ion-item-options side="end">
